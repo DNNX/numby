@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Fixnum, '#each_divisor' do
+describe Integer, '#each_divisor' do
   context 'without block' do
     it 'returns all divisors for positive non-prime number' do
       60.each_divisor.to_a.should =~ [1,2,3,4,5,6,10,12,15,20,30,60]

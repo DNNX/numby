@@ -3,29 +3,18 @@ require 'spec_helper'
 describe Integer, '#digital_root' do
 
   context 'default base' do
-    it 'should find digital root for regular number' do
-      124.digital_root.should == 7
-    end
+    for number, root in {
+        124 => 7, # 1+2+4 = 7
+        789 => 6, # 789 => 7+8+9=24 => 2+4=6
+        3   => 3, # single digit number
+        0   => 0, # special case
+        -88 => 7, # ignore minus sign
+        999_999_999_999_999 => 9 # big number
+      }
 
-    it 'should sum up digits recursively until single-digit number left' do
-      # 789 => 7+8+9 = 24 => 2+4 => 6
-      789.digital_root.should == 6
-    end
-
-    it 'should return self if it is single-digit number' do
-      3.digital_root.should == 3
-    end
-
-    it 'should ignore sign' do
-      -88.digital_root.should == 7
-    end
-
-    it 'should return 0 for zero' do
-      0.digital_root.should == 0
-    end
-
-    it 'should work for really big numbers' do
-      999_999_999_999_999.digital_root.should == 9
+      it "#{number}.digital_root should be equal to #{root}" do
+        number.digital_root.should == root
+      end
     end
   end
 
@@ -35,16 +24,10 @@ describe Integer, '#digital_root' do
       0xAA.digital_root(16).should == 5
     end
 
-    it 'should fail in case of base == 1' do
-      expect { 10.digital_root(1) }.to raise_error(ArgumentError)
-    end
-
-    it 'should fail in case of base == 0' do
-      expect { 10.digital_root(0) }.to raise_error(ArgumentError)
-    end
-
-    it 'should fail in case of base < 0' do
-      expect { 10.digital_root(-12) }.to raise_error(ArgumentError)
+    for base in [1, 0, -10]
+      it "should raise error in case of base == #{base}" do
+        expect { 10.digital_root(base) }.to raise_error(ArgumentError)
+      end
     end
   end
 

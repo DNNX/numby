@@ -1,10 +1,12 @@
 rvm:
   - 1.9.2
-  - rbx
-  - rbx-2.0
-  - ree
-  - jruby
-  - ruby-head
+#  - ruby-head
+#  The Rubies below are commented out because they don't have 
+#  Prime class (http://www.ruby-doc.org/core-1.9/classes/Prime.html)
+#  - rbx
+#  - rbx-2.0
+#  - ree
+#  - jruby
 
 notifications:
   disabled: false

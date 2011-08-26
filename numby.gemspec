@@ -3,9 +3,11 @@ $:.push File.expand_path("../lib", __FILE__)
 require "numby/version"
 require "rbconfig"
 
-def windows?
-  # http://blog.emptyway.com/2009/11/03/proper-way-to-detect-windows-platform-in-ruby/
-  Config::CONFIG['host_os'] =~ /mswin|mingw/
+class Numby::OS
+  def self.windows?
+    # http://blog.emptyway.com/2009/11/03/proper-way-to-detect-windows-platform-in-ruby/
+    Config::CONFIG['host_os'] =~ /mswin|mingw/
+  end
 end
 
 Gem::Specification.new do |s|
@@ -26,7 +28,7 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   s.add_development_dependency "rspec", "~> 2.6"
   s.add_development_dependency "guard-rspec"
-  if windows?
+  if Numby::OS.windows?
     s.add_development_dependency "rb-notifu"
     s.add_development_dependency "rb-fchange"
     s.add_development_dependency "win32console"
@@ -34,3 +36,4 @@ Gem::Specification.new do |s|
   s.add_dependency "rake", "~> 0.9"
   # s.add_runtime_dependency "rest-client"
 end
+

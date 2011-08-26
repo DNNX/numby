@@ -1,7 +1,7 @@
 require 'numby/version'
 require 'numby/divisors'
 require 'numby/digital_root'
-require 'numby/array'
+require 'numby/enumerable'
 
 module Numby
   # Your code goes here...

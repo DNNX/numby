@@ -1,13 +1,19 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
 require "numby/version"
+require "rbconfig"
+
+def windows?
+  # http://blog.emptyway.com/2009/11/03/proper-way-to-detect-windows-platform-in-ruby/
+  Config::CONFIG['host_os'] =~ /mswin|mingw/
+end
 
 Gem::Specification.new do |s|
   s.name        = "numby"
   s.version     = Numby::VERSION
   s.authors     = ["Viktar Basharymau"]
   s.email       = ["6alliapumob@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "http://github.com/DNNX/numby/"
   s.summary     = %q{Some number methods (each_divisor, digital_root, etc.)}
 
   s.rubyforge_project = "numby"
@@ -20,9 +26,11 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   s.add_development_dependency "rspec", "~> 2.6"
   s.add_development_dependency "guard-rspec"
-  s.add_development_dependency "rb-notifu"
-  s.add_development_dependency "rb-fchange"
-  s.add_development_dependency "win32console"
+  if windows?
+    s.add_development_dependency "rb-notifu"
+    s.add_development_dependency "rb-fchange"
+    s.add_development_dependency "win32console"
+  end
   s.add_dependency "rake", "~> 0.9"
   # s.add_runtime_dependency "rest-client"
 end

@@ -3,15 +3,13 @@ require 'spec_helper'
 describe Integer, '#digital_root' do
 
   context 'default base' do
-    for number, root in {
-        124 => 7, # 1+2+4 = 7
+    {   124 => 7, # 1+2+4 = 7
         789 => 6, # 789 => 7+8+9=24 => 2+4=6
         3   => 3, # single digit number
         0   => 0, # special case
         -88 => 7, # ignore minus sign
         999_999_999_999_999 => 9 # big number
-      }
-
+    }.each do |number, root|
       it "#{number}.digital_root should be equal to #{root}" do
         number.digital_root.should == root
       end
